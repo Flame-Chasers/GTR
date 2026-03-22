@@ -1,0 +1,35 @@
+val_file: '/Path/To/val_file.json'
+test_file: '/Path/To/test_file.json'
+train_file:  ['/Path/To/train_file.json',]
+############################# Example ###############################
+# val_file: '/datasets/CUHK-PEDES/processed_data/test_reid.json'
+# test_file: '/datasets/CUHK-PEDES/processed_data/test_reid.json'
+# train_file:  ['/datasets/LargeFine-Person/LargeFine-Person-qa.json',
+#               '/datasets/LargeFine-Person/LargeFine-Person-qa.json',
+#               '/datasets/LargeFine-Person/LargeFine-Person-qa.json']
+
+image_root: '/Path/To/datasets/CUHK-PEDES/imgs'
+checkpoint: '/Path/To/BLIP/model_base_capfilt_large.pth'
+
+# size of vit model; base or large
+vit: 'base'
+batch_size_train: 25
+batch_size_test: 512
+vit_grad_ckpt: False
+vit_ckpt_layer: 0
+init_lr: 1e-6
+image_size: 384
+queue_size: 57600
+alpha: 0.4
+k_test: 128
+negative_all_rank: False
+
+# optimizer
+weight_decay: 0.05
+min_lr: 0
+max_epoch: 15
+
+max_words: 77
+eval_epoch: 0
+confident: True 
+# confident: False
