@@ -80,7 +80,7 @@ dataset_root/
 
 Download our pre-training dataset  [**LargeFine-Person**](https://drive.google.com/drive/folders/1tfJwTlLawZDEcxAhrCubpkjzApRQIdvH?usp=drive_link)
 
-![Samples of our LargeFine-Person Dataset](figs/LargeFine-samples.png)![Samples of our LargeFine-Person Dataset](figs/LargeFine-samples.png)
+![Samples of our LargeFine-Person Dataset](figs/LargeFine-samples.png)
 
 
 
