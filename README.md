@@ -19,7 +19,7 @@ GTR+ combines three key components:
 - **LargeFine-Person**, a large-scale dataset for unsupervised TBPS pre-training.
 
 <p align="center">
-  <img src="figs/model-structure.png" alt="The structure of GTR+" width="90%">
+  <img src="figs/model-structure.png" alt="The structure of GTR+" width="100%">
 </p>
 
 
