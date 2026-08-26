@@ -80,25 +80,6 @@ Download our pre-training dataset  [**LargeFine-Person**](https://drive.google.c
 ![Samples of our LargeFine-Person Dataset](figs/LargeFine-samples.png)
 
 
-## Configuration
-
-Before training or evaluation, edit [`configs/blip_gmm.yaml`](configs/blip_gmm.yaml) and set the paths for your environment. In particular, check the following fields:
-
-```yaml
-val_file: '/path/to/val_file.json'
-test_file: '/path/to/test_file.json'
-train_file: ['/path/to/train_file.json']
-image_root: '/path/to/dataset/images'
-checkpoint: '/path/to/checkpoint.pth'
-```
-
-- `train_file`, `val_file`, and `test_file` specify the annotation files.
-- `image_root` specifies the image directory.
-- `checkpoint` specifies the initialization or trained checkpoint to load.
-
-Other training hyperparameters, including batch size, learning rate, image size, and the confidence-weighting option, are also defined in the YAML configuration file.
-
-
 ## Training and Evaluation
 
 ### 1. Configure paths
