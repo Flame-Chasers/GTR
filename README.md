@@ -6,7 +6,7 @@
   <a href="https://drive.google.com/drive/folders/1tfJwTlLawZDEcxAhrCubpkjzApRQIdvH?usp=drive_link"><strong>LargeFine-Person</strong></a>
 </p>
 
-This repository contains the official PyTorch implementation of **Generative Retrieval for Unsupervised Text-Based Person Search**, published in **IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2026**.
+This repository contains the official PyTorch implementation of **Generative Retrieval for Unsupervised Text-Based Person Search**, published in **IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2026** [[Paper](https://ieeexplore.ieee.org/abstract/document/11619579/)].
 
 **GTR+** is a generation-then-retrieval framework for unsupervised text-based person search (TBPS). It removes the need for expensive human-annotated descriptions by generating diverse pseudo descriptions and learning robust image-text retrieval models from noisy pseudo supervision.
 
@@ -25,7 +25,7 @@ GTR+ combines three key components:
 
 ## Updates
 
-- **[2026]** Paper published in IEEE TPAMI. [[Paper](https://ieeexplore.ieee.org/abstract/document/11619579/)]
+- **[2026]** Paper published in IEEE TPAMI.
 - **[2026-03-20]** Initial release of code.
 - ...
 
