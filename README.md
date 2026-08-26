@@ -159,6 +159,15 @@ More qualitative examples of generated descriptions and retrieval results are sh
 If you find this code useful for your research, please cite our paper.
 
 ```bibtex
-coming soon
+@ARTICLE{11619579,
+  author={Ye, Mang and Ji, Yucheng and Bai, Yang and Cao, Min and Chai, Siyuan and Du, Bo and Zhang, Min},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={Generative Retrieval for Unsupervised Text-Based Person Search}, 
+  year={2026},
+  volume={},
+  number={},
+  pages={1-17},
+  keywords={Modeling;Training;Conferences;Learning (artificial intelligence);Machining;Computers;Machine intelligence;Noise measurement;Pattern analysis;Text to image;Image captioning;person re-identification;text-based person search;unsupervised learning},
+  doi={10.1109/TPAMI.2026.3713379}}
 ```
 
