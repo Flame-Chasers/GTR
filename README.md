@@ -1,52 +1,50 @@
 # GTR+: Generative Retrieval for Unsupervised Text-Based Person Search
 
-This is the official PyTorch implementation of our paper **Generative Retrieval for Unsupervised Text-Based Person Search**. The paper link will be released soon.
+<p align="center">
+  <a href="https://ieeexplore.ieee.org/abstract/document/11619579/"><strong>Paper</strong></a> ·
+  <a href="https://github.com/Flame-Chasers/GTR"><strong>Code</strong></a> ·
+  <a href="https://drive.google.com/drive/folders/1tfJwTlLawZDEcxAhrCubpkjzApRQIdvH?usp=drive_link"><strong>LargeFine-Person</strong></a> ·
+</p>
+
+This repository contains the official PyTorch implementation of **Generative Retrieval for Unsupervised Text-Based Person Search**, published in **IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2026**.
+
+**GTR+** is a generation-then-retrieval framework for unsupervised text-based person search (TBPS). It removes the need for expensive human-annotated descriptions by generating diverse pseudo descriptions and learning robust image-text retrieval models from noisy pseudo supervision.
 
 ## Highlights
 
-We propose **GTR+** for unsupervised text-based person search, removing the need for expensive human-annotated descriptions. GTR+ combines:
+GTR+ combines three key components:
 
-- a **three-tier description generation framework** for producing fine-grained and diverse pseudo texts;
-- an **adaptive confidence-weighted retrieval learning framework** to alleviate noisy supervision;
+- **Three-tier description generation** for producing fine-grained and stylistically diverse pseudo texts.
+- **Adaptive confidence-weighted retrieval learning** for reducing the impact of noisy pseudo supervision.
+- **LargeFine-Person**, a large-scale dataset for unsupervised TBPS pre-training.
 
-- **LargeFine-Person**, a large-scale benchmark for unsupervised TBPS pre-training.
+<p align="center">
+  <img src="figs/model-structure.png" alt="The structure of GTR+" width="90%">
+</p>
 
-![The structure of GTR+ model](figs/model-structure.png)
 
 ## Updates
 
-- [2026-3-20] Initial release of code.
+- **[2026]** Paper published in IEEE TPAMI. [[Paper](https://ieeexplore.ieee.org/abstract/document/11619579/)]
+- **[2026-03-20]** Initial release of code.
 - ...
 
 ## Requirements
 
 Our experiments are mainly conducted on NVIDIA L40 GPUs. The code should also run on other GPUs with sufficient memory.
 
-More dependency details are provided in [requirements.txt](requirements.txt).
-
-## Quick Start
+We recommend using Python 3.10:
 
 ```bash
-git clone ...
-cd ...
-conda create -n blip -y python=3.10
-conda activate blip
+git clone https://github.com/Flame-Chasers/GTR.git
+cd GTR
+
+conda create -n gtrplus -y python=3.10
+conda activate gtrplus
 pip install -r requirements.txt
 ```
 
-## Training/Evaluation
-
-The following scripts provide an example for training and evaluation.
-Please modify the dataset paths and checkpoint paths in the scripts before running.
-
-```bash
-# Training
-bash shell/train.sh
-
-# Evaluation
-bash shell/eval.sh
-```
-
+> **Note:** Dependency versions are not currently pinned in this repository. Please install a PyTorch build compatible with your CUDA environment and the remaining Python packages required by the codebase before running the experiments.
 
 
 ## Prepare Datasets
@@ -76,6 +74,7 @@ dataset_root/
     └── LargeFine_Person_sty.json
 ```
 
+
 ### LargeFine-Person Dataset
 
 Download our pre-training dataset  [**LargeFine-Person**](https://drive.google.com/drive/folders/1tfJwTlLawZDEcxAhrCubpkjzApRQIdvH?usp=drive_link)
@@ -83,8 +82,55 @@ Download our pre-training dataset  [**LargeFine-Person**](https://drive.google.c
 ![Samples of our LargeFine-Person Dataset](figs/LargeFine-samples.png)
 
 
+## Configuration
 
-## Unsupervised TBPS Results with [BLIP](https://github.com/salesforce/BLIP) as Baseline
+Before training or evaluation, edit [`configs/blip_gmm.yaml`](configs/blip_gmm.yaml) and set the paths for your environment. In particular, check the following fields:
+
+```yaml
+val_file: '/path/to/val_file.json'
+test_file: '/path/to/test_file.json'
+train_file: ['/path/to/train_file.json']
+image_root: '/path/to/dataset/images'
+checkpoint: '/path/to/checkpoint.pth'
+```
+
+- `train_file`, `val_file`, and `test_file` specify the annotation files.
+- `image_root` specifies the image directory.
+- `checkpoint` specifies the initialization or trained checkpoint to load.
+
+Other training hyperparameters, including batch size, learning rate, image size, and the confidence-weighting option, are also defined in the YAML configuration file.
+
+
+## Training and Evaluation
+
+The repository provides example scripts in [`shell/`](shell/).
+
+Before running them, update:
+
+- `OUTPUT_DIR` in `shell/train.sh` or `shell/eval.sh`;
+- `CUDA_VISIBLE_DEVICES` according to your available GPUs;
+- `--nproc_per_node` so that it matches the number of GPUs used;
+- dataset and checkpoint paths in `configs/blip_gmm.yaml`.
+
+### Training
+
+```bash
+bash shell/train.sh
+```
+
+The current example training script launches `train_ps.py` with `configs/blip_gmm.yaml` using one distributed process.
+
+### Evaluation
+
+```bash
+bash shell/eval.sh
+```
+
+The current example evaluation script launches `train_ps.py` with `--evaluate --eval_mAP`. It is configured for four GPUs by default, so adjust the GPU settings when necessary.
+
+## Main Results
+
+### Unsupervised TBPS Results with [BLIP](https://github.com/salesforce/BLIP) as Baseline
 
 **CUHK-PEDES**
 
@@ -121,7 +167,7 @@ Download our pre-training dataset  [**LargeFine-Person**](https://drive.google.c
 
 
 
-## Supervised TBPS Results with [IRRA](https://github.com/anosorae/IRRA/tree/main) as Baseline
+### Supervised TBPS Results with [IRRA](https://github.com/anosorae/IRRA/tree/main) as Baseline
 
 **CUHK-PEDES**
 
