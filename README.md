@@ -3,7 +3,7 @@
 <p align="center">
   <a href="https://ieeexplore.ieee.org/abstract/document/11619579/"><strong>Paper</strong></a> ·
   <a href="https://github.com/Flame-Chasers/GTR"><strong>Code</strong></a> ·
-  <a href="https://drive.google.com/drive/folders/1tfJwTlLawZDEcxAhrCubpkjzApRQIdvH?usp=drive_link"><strong>LargeFine-Person</strong></a> ·
+  <a href="https://drive.google.com/drive/folders/1tfJwTlLawZDEcxAhrCubpkjzApRQIdvH?usp=drive_link"><strong>LargeFine-Person</strong></a>
 </p>
 
 This repository contains the official PyTorch implementation of **Generative Retrieval for Unsupervised Text-Based Person Search**, published in **IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2026**.
