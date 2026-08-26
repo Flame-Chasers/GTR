@@ -29,7 +29,7 @@ GTR+ combines three key components:
 - **[2026-03-20]** Initial release of code.
 - ...
 
-## Requirements
+## Setup
 
 Our experiments are mainly conducted on NVIDIA L40 GPUs. The code should also run on other GPUs with sufficient memory.
 
@@ -44,10 +44,8 @@ conda activate gtrplus
 pip install -r requirements.txt
 ```
 
-> **Note:** Dependency versions are not currently pinned in this repository. Please install a PyTorch build compatible with your CUDA environment and the remaining Python packages required by the codebase before running the experiments.
 
-
-## Prepare Datasets
+## Dataset Preparation
 
 Download the [**CUHK-PEDES**](https://github.com/ShuangLI59/Person-Search-with-Natural-Language-Description) dataset, [**ICFG-PEDES**](https://github.com/zifyloo/SSAN) dataset and [**RSTPReid**](https://github.com/NjtechCVLab/RSTPReid-Dataset) dataset.
 
@@ -103,34 +101,38 @@ Other training hyperparameters, including batch size, learning rate, image size,
 
 ## Training and Evaluation
 
-The repository provides example scripts in [`shell/`](shell/).
+### 1. Configure paths
 
-Before running them, update:
+Edit [`configs/blip_gmm.yaml`](configs/blip_gmm.yaml):
 
-- `OUTPUT_DIR` in `shell/train.sh` or `shell/eval.sh`;
-- `CUDA_VISIBLE_DEVICES` according to your available GPUs;
-- `--nproc_per_node` so that it matches the number of GPUs used;
-- dataset and checkpoint paths in `configs/blip_gmm.yaml`.
+```yaml
+val_file: '/path/to/val_file.json'
+test_file: '/path/to/test_file.json'
+train_file: ['/path/to/train_file.json']
 
-### Training
+image_root: '/path/to/dataset/images'
+checkpoint: '/path/to/checkpoint.pth'
+```
+
+Other hyperparameters, including batch size, learning rate, image size, and confidence weighting, are defined in the same configuration file.
+
+### 2. Train
 
 ```bash
 bash shell/train.sh
 ```
 
-The current example training script launches `train_ps.py` with `configs/blip_gmm.yaml` using one distributed process.
-
-### Evaluation
+### 3. Evaluate
 
 ```bash
 bash shell/eval.sh
 ```
 
-The current example evaluation script launches `train_ps.py` with `--evaluate --eval_mAP`. It is configured for four GPUs by default, so adjust the GPU settings when necessary.
+Before running the scripts, update `OUTPUT_DIR`, `CUDA_VISIBLE_DEVICES`, and `--nproc_per_node` as needed. The current example uses one process for training and four processes for evaluation.
 
 ## Main Results
 
-### Unsupervised TBPS Results with [BLIP](https://github.com/salesforce/BLIP) as Baseline
+### Unsupervised TBPS Results ([BLIP](https://github.com/salesforce/BLIP) as Baseline)
 
 **CUHK-PEDES**
 
@@ -167,7 +169,7 @@ The current example evaluation script launches `train_ps.py` with `--evaluate --
 
 
 
-### Supervised TBPS Results with [IRRA](https://github.com/anosorae/IRRA/tree/main) as Baseline
+### Supervised TBPS Results ([IRRA](https://github.com/anosorae/IRRA/tree/main) as Baseline)
 
 **CUHK-PEDES**
 
