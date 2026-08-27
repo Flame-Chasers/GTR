@@ -3,7 +3,7 @@
 <p align="center">
   <a href="https://ieeexplore.ieee.org/abstract/document/11619579/"><strong>Paper</strong></a> ·
   <a href="https://github.com/Flame-Chasers/GTR"><strong>Code</strong></a> ·
-  <a href="https://drive.google.com/drive/folders/1tfJwTlLawZDEcxAhrCubpkjzApRQIdvH?usp=drive_link"><strong>LargeFine-Person</strong></a>
+  <a href="https://flame-chasers.github.io/GTR/dataset/"><strong>LargeFine-Person</strong></a>
 </p>
 
 This repository contains the official PyTorch implementation of **Generative Retrieval for Unsupervised Text-Based Person Search**, published in **IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2026** [[Paper](https://ieeexplore.ieee.org/abstract/document/11619579/)].
@@ -75,7 +75,15 @@ dataset_root/
 
 ### LargeFine-Person Dataset
 
-Download our pre-training dataset  [**LargeFine-Person**](https://drive.google.com/drive/folders/1tfJwTlLawZDEcxAhrCubpkjzApRQIdvH?usp=drive_link)
+Download our pre-training dataset [**LargeFine-Person**](https://flame-chasers.github.io/GTR/dataset/).
+
+<p align="center">
+  <a href="https://flame-chasers.github.io/GTR/">
+    <img src="dataset_stats/assets/dataset-visitors.svg" alt="Daily LargeFine-Person dataset access statistics" width="100%">
+  </a>
+</p>
+
+The chart is updated daily by GitHub Actions and reports approximate unique visits to the tracked dataset link.
 
 ![Samples of our LargeFine-Person Dataset](figs/LargeFine-samples.png)
 
