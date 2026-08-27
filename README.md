@@ -77,13 +77,15 @@ dataset_root/
 
 Download our pre-training dataset [**LargeFine-Person**](https://flame-chasers.github.io/GTR/dataset/).
 
+<!-- Dataset access chart is temporarily hidden while traffic is low.
 <p align="center">
   <a href="https://flame-chasers.github.io/GTR/">
-    <img src="dataset_stats/assets/dataset-visitors.svg" alt="Daily LargeFine-Person dataset access statistics" width="100%">
+    <img src="dataset_stats/assets/dataset-visitors.svg" alt="Cumulative LargeFine-Person dataset access statistics" width="100%">
   </a>
 </p>
 
-The chart is updated daily by GitHub Actions and reports approximate unique visits to the tracked dataset link.
+The chart is updated daily by GitHub Actions and reports approximate cumulative visits to the tracked dataset link.
+-->
 
 ![Samples of our LargeFine-Person Dataset](figs/LargeFine-samples.png)
 

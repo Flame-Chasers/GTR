@@ -3,7 +3,7 @@
      width="960" height="360"
      role="img" aria-labelledby="chart-title chart-desc">
   <title id="chart-title">LargeFine-Person Dataset Access</title>
-  <desc id="chart-desc">Initial daily unique-visit chart for the last 30 days. Tracking is not configured yet, so all values are zero.</desc>
+  <desc id="chart-desc">Initial cumulative daily unique-visit chart for the last 30 days. Tracking is not configured yet, so all values are zero.</desc>
   <style>
     .background { fill: #ffffff; }
     .title { fill: #172033; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 24px; font-weight: 650; }
@@ -22,9 +22,9 @@
 
   <rect class="background" width="960" height="360" rx="12"/>
   <text class="title" x="76" y="38">LargeFine-Person Dataset Access</text>
-  <text class="subtitle" x="76" y="60">Daily unique visits, last 30 days</text>
+  <text class="subtitle" x="76" y="60">Cumulative daily unique visits, last 30 days</text>
   <text class="metric" x="928" y="38" text-anchor="end">0</text>
-  <text class="metric-label" x="928" y="58" text-anchor="end">visits in range</text>
+  <text class="metric-label" x="928" y="58" text-anchor="end">cumulative visits</text>
 
   <line class="grid" x1="76" y1="86" x2="928" y2="86"/>
   <line class="grid" x1="76" y1="139" x2="928" y2="139"/>
@@ -41,13 +41,13 @@
 
   <polygon class="area" points="76,298 76,298 105,298 135,298 164,298 194,298 223,298 253,298 282,298 311,298 341,298 370,298 400,298 429,298 459,298 488,298 516,298 546,298 575,298 605,298 634,298 664,298 693,298 723,298 752,298 781,298 811,298 840,298 870,298 899,298 928,298 928,298"/>
   <polyline class="line" points="76,298 105,298 135,298 164,298 194,298 223,298 253,298 282,298 311,298 341,298 370,298 400,298 429,298 459,298 488,298 516,298 546,298 575,298 605,298 634,298 664,298 693,298 723,298 752,298 781,298 811,298 840,298 870,298 899,298 928,298"/>
-  <circle class="point" cx="76" cy="298" r="3"><title>0 visits</title></circle>
-  <circle class="point" cx="223" cy="298" r="3"><title>0 visits</title></circle>
-  <circle class="point" cx="370" cy="298" r="3"><title>0 visits</title></circle>
-  <circle class="point" cx="516" cy="298" r="3"><title>0 visits</title></circle>
-  <circle class="point" cx="664" cy="298" r="3"><title>0 visits</title></circle>
-  <circle class="point" cx="811" cy="298" r="3"><title>0 visits</title></circle>
-  <circle class="point" cx="928" cy="298" r="3"><title>0 visits</title></circle>
+  <circle class="point" cx="76" cy="298" r="3"><title>0 cumulative visits</title></circle>
+  <circle class="point" cx="223" cy="298" r="3"><title>0 cumulative visits</title></circle>
+  <circle class="point" cx="370" cy="298" r="3"><title>0 cumulative visits</title></circle>
+  <circle class="point" cx="516" cy="298" r="3"><title>0 cumulative visits</title></circle>
+  <circle class="point" cx="664" cy="298" r="3"><title>0 cumulative visits</title></circle>
+  <circle class="point" cx="811" cy="298" r="3"><title>0 cumulative visits</title></circle>
+  <circle class="point" cx="928" cy="298" r="3"><title>0 cumulative visits</title></circle>
 
   <text class="axis-label" x="76" y="326" text-anchor="middle">07-29</text>
   <text class="axis-label" x="223" y="326" text-anchor="middle">08-03</text>
@@ -58,5 +58,5 @@
   <text class="axis-label" x="928" y="326" text-anchor="middle">08-27</text>
 
   <text class="note" x="502" y="184" text-anchor="middle">Tracking has not been configured yet.</text>
-  <text class="footer" x="928" y="346" text-anchor="end">Updated 2026-08-27 14:26 Asia/Shanghai</text>
+  <text class="footer" x="928" y="346" text-anchor="end">Updated 2026-08-27 14:32 Asia/Shanghai</text>
 </svg>

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch GoatCounter daily statistics and render an SVG line chart."""
+"""Fetch GoatCounter daily statistics and render a cumulative SVG line chart."""
 
 from __future__ import annotations
 
@@ -117,6 +117,15 @@ def series_from_payload(
     return result
 
 
+def cumulative_series(data: list[tuple[date, int]]) -> list[tuple[date, int]]:
+    total = 0
+    result: list[tuple[date, int]] = []
+    for day, daily_value in data:
+        total += max(0, daily_value)
+        result.append((day, total))
+    return result
+
+
 def nice_ceiling(value: int) -> int:
     if value <= 1:
         return 1
@@ -147,7 +156,7 @@ def render_svg(
     values = [value for _, value in data]
     maximum = max(values, default=0)
     y_max = nice_ceiling(maximum)
-    total = sum(values)
+    total = values[-1] if values else 0
 
     def x_position(index: int) -> float:
         if len(data) <= 1:
@@ -196,12 +205,12 @@ def render_svg(
     for (x, y), (_, value) in zip(points, data):
         point_elements.append(
             f'<circle class="point" cx="{x:.2f}" cy="{y:.2f}" r="3">'
-            f'<title>{value} visits</title></circle>'
+            f'<title>{value} cumulative visits</title></circle>'
         )
 
     title = html.escape(f"{dataset_name} Dataset Access")
     subtitle = html.escape(
-        f"Daily unique visits (approx.) · {len(data)} complete days"
+        f"Cumulative daily unique visits (approx.) - {len(data)} complete days"
     )
     generated = html.escape(
         f"Updated {generated_at.strftime('%Y-%m-%d %H:%M')} {timezone_name}"
@@ -235,7 +244,7 @@ def render_svg(
   <text class="text subtitle" x="{left}" y="60">{subtitle}</text>
 
   <text class="text metric" x="{width - right}" y="38" text-anchor="end">{total}</text>
-  <text class="text metric-label" x="{width - right}" y="58" text-anchor="end">visits in range</text>
+  <text class="text metric-label" x="{width - right}" y="58" text-anchor="end">cumulative visits</text>
 
   {''.join(y_ticks)}
   <line class="axis" x1="{left}" y1="{top + plot_height}" x2="{left + plot_width}" y2="{top + plot_height}"/>
@@ -246,7 +255,7 @@ def render_svg(
   {''.join(point_elements)}
   {''.join(x_labels)}
 
-  <text class="footer" x="{left}" y="{height - 18}">Source: GoatCounter · counts begin after the tracked link is enabled</text>
+  <text class="footer" x="{left}" y="{height - 18}">Source: GoatCounter - cumulative sum starts after the tracked link is enabled</text>
   <text class="footer" x="{width - right}" y="{height - 18}" text-anchor="end">{generated}</text>
 </svg>
 """
@@ -276,9 +285,10 @@ def main() -> int:
         start_day = end_day - timedelta(days=config["chart_days"] - 1)
 
         payload = fetch_stats(config, token, start_day, end_day)
-        data = series_from_payload(
+        daily_data = series_from_payload(
             payload, config["tracking_path"], start_day, end_day
         )
+        data = cumulative_series(daily_data)
         svg = render_svg(
             data,
             str(config["dataset_name"]),
