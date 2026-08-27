@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta http-equiv="refresh" content="3;url={{DRIVE_URL_HTML}}">
+  <title>Opening {{DATASET_NAME_HTML}}…</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+    body { min-height: 100vh; margin: 0; display: grid; place-items: center; }
+    main { max-width: 560px; padding: 32px; text-align: center; }
+    a { color: inherit; }
+    .spinner {
+      width: 28px; height: 28px; margin: 0 auto 20px;
+      border: 3px solid currentColor; border-right-color: transparent;
+      border-radius: 50%; animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+
+  <script>
+    window.goatcounter = { no_onload: true, no_events: true };
+  </script>
+  <script
+    data-goatcounter="{{GOATCOUNTER_ENDPOINT_HTML}}"
+    data-goatcounter-settings='{"no_onload":true,"no_events":true}'
+    src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+  <main>
+    <div class="spinner" aria-hidden="true"></div>
+    <h1>Opening {{DATASET_NAME_HTML}}…</h1>
+    <p>
+      You will be redirected to Google Drive.
+      <a href="{{DRIVE_URL_HTML}}">Continue manually</a>.
+    </p>
+  </main>
+
+  <script>
+    (function () {
+      const target = {{DRIVE_URL_JS}};
+      const trackingPath = {{TRACKING_PATH_JS}};
+      const datasetName = {{DATASET_NAME_JS}};
+      let redirected = false;
+
+      function redirect() {
+        if (redirected) return;
+        redirected = true;
+        window.location.replace(target);
+      }
+
+      try {
+        if (
+          window.goatcounter &&
+          typeof window.goatcounter.url === "function"
+        ) {
+          const filtered =
+            typeof window.goatcounter.filter === "function"
+              ? window.goatcounter.filter()
+              : false;
+
+          if (!filtered) {
+            const pixel = new Image();
+            pixel.onload = redirect;
+            pixel.onerror = redirect;
+            pixel.src = window.goatcounter.url({
+              path: trackingPath,
+              title: datasetName + " dataset access"
+            });
+            window.setTimeout(redirect, 1200);
+            return;
+          }
+        }
+      } catch (error) {
+        console.warn("Dataset access tracking was skipped.", error);
+      }
+
+      redirect();
+    }());
+  </script>
+
+  <noscript>
+    <img
+      src="{{GOATCOUNTER_ENDPOINT_HTML}}?p=%2Flargefine-person&amp;t=LargeFine-Person%20dataset%20access"
+      alt="" width="1" height="1">
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,77 @@
+name: Dataset access statistics
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "dataset_stats/**"
+      - ".github/workflows/dataset-stats.yml"
+  schedule:
+    # 00:00 Asia/Shanghai (UTC+8).
+    - cron: "0 16 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: dataset-access-statistics
+  cancel-in-progress: false
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Update dataset access chart
+        env:
+          GOATCOUNTER_API_KEY: ${{ secrets.GOATCOUNTER_API_KEY }}
+        run: |
+          if [ -z "$GOATCOUNTER_API_KEY" ]; then
+            echo "::warning::GOATCOUNTER_API_KEY is not configured; keeping the placeholder/current chart."
+          else
+            python3 dataset_stats/scripts/update_chart.py
+          fi
+
+      - name: Commit generated chart
+        env:
+          GOATCOUNTER_API_KEY: ${{ secrets.GOATCOUNTER_API_KEY }}
+        run: |
+          if [ -z "$GOATCOUNTER_API_KEY" ]; then
+            exit 0
+          fi
+
+          git add dataset_stats/assets/dataset-visitors.svg
+          if git diff --cached --quiet; then
+            echo "Chart did not change."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(stats): update dataset access chart [skip ci]"
+          git push
+
+      - name: Build tracking page
+        run: python3 dataset_stats/scripts/build_site.py --output _site
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

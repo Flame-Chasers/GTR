@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 960 360"
+     width="960" height="360"
+     role="img" aria-labelledby="title desc"
+     style="color-scheme: light dark">
+  <title id="title">LargeFine-Person Dataset Access</title>
+  <desc id="desc">Waiting for the first statistics update.</desc>
+  <style>
+    .bg { fill: Canvas; }
+    .text { fill: CanvasText; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .title { font-size: 24px; font-weight: 650; }
+    .note { font-size: 14px; opacity: .65; }
+    .line { stroke: CanvasText; stroke-opacity: .18; }
+  </style>
+  <rect class="bg" width="960" height="360" rx="12"/>
+  <text class="text title" x="70" y="58">LargeFine-Person Dataset Access</text>
+  <line class="line" x1="70" y1="285" x2="925" y2="285"/>
+  <text class="text note" x="480" y="180" text-anchor="middle">
+    Waiting for the first GitHub Actions statistics update
+  </text>
+</svg>

@@ -1,0 +1,8 @@
+{
+  "dataset_name": "LargeFine-Person",
+  "drive_url": "https://drive.google.com/drive/folders/1tfJwTlLawZDEcxAhrCubpkjzApRQIdvH",
+  "tracking_path": "/largefine-person",
+  "goatcounter_site": "https://REPLACE-ME.goatcounter.com",
+  "chart_days": 30,
+  "timezone": "Asia/Shanghai"
+}
